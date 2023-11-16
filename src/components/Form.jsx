@@ -32,7 +32,7 @@ const Form = ({ users, setUsers }) => {
   };
 
   return (
-    <form className="row" onSubmit={onSubmit}>
+    <form className="row " onSubmit={onSubmit}>
       <p>Contact App</p>
       <input
         type="text"
