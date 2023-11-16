@@ -18,7 +18,7 @@ function App() {
               element={<List users={users} setUsers={setUsers} />}
             />
             <Route
-              path="/form"
+              path="/"
               element={<Form users={users} setUsers={setUsers} />}
             />
           </Route>

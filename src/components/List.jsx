@@ -4,10 +4,19 @@ import { useState, useEffect } from "react";
 import { BsArrowLeftCircleFill } from "react-icons/bs";
 import { BsArrowRightCircleFill } from "react-icons/bs";
 import { BsTrashFill } from "react-icons/bs";
+import searchImage from "../search.png";
 const List = ({ users, setUsers }) => {
+  const [showSearchInput, setShowSearchInput] = useState(true);
+  const handleImgClick = () => {
+    setShowSearchInput(false);
+  };
+  const handleInputBlur = () => {
+    setShowSearchInput(true);
+  };
   const itemsUserPage = 5;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [filterSearch, setFilterSearch] = useState("");
 
   useEffect(() => {
     if (users.length > 0) {
@@ -18,7 +27,13 @@ const List = ({ users, setUsers }) => {
   const getCurrentPageUsers = () => {
     const startIndex = (currentPage - 1) * itemsUserPage;
     const endIndex = startIndex + itemsUserPage;
-    return users.slice(startIndex, endIndex);
+    const filteredPerson = users.filter(
+      (user) =>
+        user.name.toLowerCase().includes(filterSearch.toLowerCase()) ||
+        user.surName.toLowerCase().includes(filterSearch.toLowerCase()) ||
+        user.phoneNumber.includes(filterSearch)
+    );
+    return filteredPerson.slice(startIndex, endIndex);
   };
 
   const handlePageChange = (newPage) => {
@@ -33,6 +48,25 @@ const List = ({ users, setUsers }) => {
     <div>
       <ul>
         <p>List</p>
+        {showSearchInput ? (
+          <img
+            src={searchImage}
+            alt=""
+            className="searchImg"
+            onClick={handleImgClick}
+          />
+        ) : (
+          <input
+            type="text"
+            name="search"
+            className="searchInput"
+            placeholder="Search"
+            onBlur={handleInputBlur}
+            value={filterSearch}
+            onChange={(e) => setFilterSearch(e.target.value)}
+          />
+        )}
+
         <table>
           <thead>
             <tr>
@@ -78,7 +112,7 @@ const List = ({ users, setUsers }) => {
             />
           )}
 
-          <Link to="/form">
+          <Link to="/">
             <button className="btn btn-outline-secondary  rounded-pill ">
               Form
             </button>
