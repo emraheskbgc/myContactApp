@@ -6,7 +6,10 @@ import List from "./components/List";
 import Form from "./components/Form";
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(() => {
+    const storedUsers = localStorage.getItem("users");
+    return storedUsers ? JSON.parse(storedUsers) : [];
+  });
 
   return (
     <>

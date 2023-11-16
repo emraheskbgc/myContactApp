@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useFetcher } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { BsArrowLeftCircleFill } from "react-icons/bs";
 import { BsArrowRightCircleFill } from "react-icons/bs";
@@ -23,7 +23,9 @@ const List = ({ users, setUsers }) => {
       setTotalPages(Math.ceil(users.length / itemsUserPage));
     }
   }, [users]);
-
+  useEffect(() => {
+    localStorage.setItem("users", JSON.stringify(users));
+  }, [users]);
   const getCurrentPageUsers = () => {
     const startIndex = (currentPage - 1) * itemsUserPage;
     const endIndex = startIndex + itemsUserPage;
