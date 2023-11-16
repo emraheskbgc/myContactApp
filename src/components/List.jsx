@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useFetcher } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { BsArrowLeftCircleFill } from "react-icons/bs";
 import { BsArrowRightCircleFill } from "react-icons/bs";
